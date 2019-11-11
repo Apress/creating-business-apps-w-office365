@@ -1,0 +1,50 @@
+<style>
+
+#contactdialog {
+	display: none;
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css">
+
+<script type="text/javascript">
+
+$(function () {
+		$("#contactlink").button().click(function () {
+			$("#contactdialog").dialog({
+				width: 500,
+				buttons: [
+					{
+					  text: "OK",
+					  click: function() {
+						$(this).dialog("close");
+					  }
+					}
+				  ],
+			});
+
+			return false;
+		});
+	});
+
+</script>
+
+<button id="contactlink" aria-label="Contact" title="Contact">Contact</button>
+
+<div id="contactdialog" title="Contact Support">
+	<h2>Support Point of Contact:</h2>
+	<br />
+	<h3>PHONE</h3>
+	<p>
+		(719) 555-5555
+	</p>
+	<h3>E-MAIL
+	</h3>
+	<p>
+		<a href="mailto:support@support.com">support@support.com</a>
+	</p>
+</div>

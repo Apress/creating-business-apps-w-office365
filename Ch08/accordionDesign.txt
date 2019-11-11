@@ -1,0 +1,94 @@
+<style type="text/css">
+	/*** CSS for collapsible headers ***/
+	#DeltaPlaceHolderMain h1 {
+		background: #002b5c;
+		padding: .25em;
+		border-radius: 2px 2px 2px 2px;
+		color: #e4e5e6;
+		cursor: pointer;
+		margin-bottom: .5em;
+	}
+
+	#DeltaPlaceHolderMain h1.expand {
+		background: #e4e5e6;
+		color: #002b5c;
+	}
+
+	/*#DeltaPlaceHolderMain h1.collapse {
+		background: #ff0000;
+		color: #fff;
+	}*/
+
+	/*** Collapsed h1 ***/
+	#DeltaPlaceHolderMain h1.expand:before {
+		content: '\002B ';
+		padding-right: 5px;
+		font-weight: bold;
+	}
+	/*** Expanded h1 ***/
+	#DeltaPlaceHolderMain h1:before {
+		content: '\002D ';
+		padding-right: 5px;
+		font-weight: bold;
+	}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+var collapseHeaders = false; // added functionality so headers are not automatically collapsed -- JMR
+// from http://info.summit7systems.com/blog/how-to-create-dynamic-accordions-in-sharepoint-pages
+
+	Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(MyPageLoaded);
+	function MyPageLoaded(sender, args) // use this instead of document.ready since calendars fully loaded by this event
+	{
+		UpdateToggle();
+	}
+
+	function UpdateToggle(){
+		var inEditMode = Utils.checkPageInEditMode();
+		// Prevent the collapsing of <h1> blocks when in SharePoint's [Edit Mode]
+		if (!inEditMode) {
+			UI.collapseContentHeaders();
+			UI.toggleContentHeaders();
+		}
+	}
+
+var UI = {
+	collapseContentHeaders: function () {
+		$('#DeltaPlaceHolderMain h1').each(function (index, value) {
+			// Collapses all <h1> blocks except for the first encountered
+			if ((index > 0) && collapseHeaders) {
+				$(this).toggleClass('expand').nextUntil('h1').slideToggle(100);
+			}
+		});
+	},
+	toggleContentHeaders: function () {
+		// Toggles the accordion behavior for <h1> regions onClick
+		$('#DeltaPlaceHolderMain h1').click(function () {
+			$(this).toggleClass('expand').nextUntil('h1').slideToggle(100);
+		});
+	}
+}
+
+var Utils = {
+	checkPageInEditMode: function () {
+		var pageEditMode = null;
+		var wikiPageEditMode = null;
+		// Edit check for Wiki Pages
+		if (document.forms[MSOWebPartPageFormName]._wikiPageMode) {
+			wikiPageEditMode = document.forms[MSOWebPartPageFormName]._wikiPageMode.value;
+		}
+		// Edit check for all other pages
+		if (document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode) {
+			pageEditMode = document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value;
+		}
+		// Return the either/or if one of the page types is flagged as in Edit Mode
+		if (!pageEditMode && !wikiPageEditMode) {
+			return false;
+		}
+		return pageEditMode == "1" || wikiPageEditMode == "Edit";
+	}
+}
+</script>

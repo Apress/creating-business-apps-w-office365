@@ -1,0 +1,111 @@
+﻿<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+var shouldColorText = true;
+var numUSAFAIterations = 0;
+var maxUSAFAIterations = 20;
+var SEPARATOR = "|||";
+
+$(function () {
+ window.setTimeout(ColorCalendar, 1000);
+ });
+
+function ColorCalendar() {
+	var container = $('#s4-bodyContainer');
+	var query = 'a:contains(\'' + SEPARATOR + '\')';
+
+	numUSAFAIterations++;
+
+	if(container.find(query).length > 0) {
+		container.find(query).each(function (i) {
+			var box = $(this).parents('div[title]');
+			var colors = GetColorCodeFromLocation(GetLocation(this.innerHTML));
+			var anchor = $(this);
+
+			anchor.text(GetActualText(anchor.text()))
+			box.attr("title", GetActualText(box.attr("title")));
+			box.css('background-color', colors[0]);
+			box.css('display', 'block');
+			if(shouldColorText ) {
+				box.find('div, a').css("cssText", "color: " + colors[1] + " !important;");
+			}
+		});
+	}
+	if (numUSAFAIterations <= maxUSAFAIterations){
+		window.setTimeout(ColorCalendar, 2000);
+	}
+ }
+
+function GetActualText(originalText) {
+	var parts = originalText.split(SEPARATOR);
+	var returnString = parts[2];
+
+	return returnString;
+	//return parts[0] + parts[2];
+ }
+
+function GetLocation(originalText) {
+	var parts = originalText.split(SEPARATOR);
+
+	return parts[1];
+ }
+
+function GetColorCodeFromLocation(location) {
+	var locationArray = location.split(",");
+	var bgcolor = '#4802fb';
+	var fgcolor = '#ffffff';
+
+		switch (location.trim()) {
+			case 'Academic Building 1':
+				bgcolor = '#cd0000';
+				fgcolor = '#ffffff';
+				break;
+			case 'Academic Building 2':
+				bgcolor = '#eb8f0b';
+				fgcolor = '#000000';
+				break;
+			case 'Gym':
+				bgcolor = '#ffff00';
+				fgcolor = '#000000';
+				break;
+			case 'Conference Room 1':
+				bgcolor = '#0a4723';
+				fgcolor = '#ffffff';
+				break;
+			case 'Conference Room 2':
+				bgcolor = '#3d1c45';
+				fgcolor = '#ffffff';
+				break;
+			case 'Football Stadium':
+				bgcolor = '#45aff2';
+				fgcolor = '#000000';
+				break;
+			case 'Gym':
+				bgcolor = '#4169e1';
+				fgcolor = '#ffffff';
+				break;
+			case 'Headquarters':
+				bgcolor = '#790bf3';
+				fgcolor = '#ffffff';
+				break;
+			case 'Library':
+				bgcolor = '#000000';
+				fgcolor = '#ffffff';
+				break;
+			case 'Not Applicable':
+				bgcolor = '#f0cb20';
+				fgcolor = '#000000';
+				break;
+			case 'Off Base':
+				bgcolor = '#838785';
+				fgcolor = '#ffffff';
+				break;
+			case 'Theater':
+				bgcolor = '#731717';
+				fgcolor = '#ffffff';
+				break;
+		}
+ return [bgcolor, fgcolor];
+ }
+</script>

@@ -1,0 +1,93 @@
+<style>
+
+#MainPageLinkButtons ul{
+	list-style:none;
+}
+
+#MainPageLinkButtons ul li{
+	display:inline-block;
+	padding:3px;
+}
+
+.O365Buttons{
+	width: 150px;
+}
+
+#MainPageLinkButtons #icons{
+	margin-left: 10px;
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css">
+
+<script type="text/javascript">
+	$(function () {
+		$("#Google").button().click(function(){
+			showO365Window("https://www.google.com", "Google");
+			
+			return false;
+		});
+		
+		$("#LinkedIn").button().click(function(){
+			showO365Window("https://www.linkedin.com", "LinkedIn");
+			
+			return false;
+		});
+
+		$("#FaceBook").button().click(function(){
+			showO365Window("https://www.facebook.com", "FaceBook");
+			
+			return false;
+		});
+
+		$("#Twitter").button().click(function(){
+			showO365Window("https://www.twitter.com", "Twitter");
+			
+			return false;
+		});
+	
+		$("#Bing").button().click(function(){
+			showO365Window("https://www.bing.com", "Bing");
+			
+			return false;
+		});
+
+		$("#Microsoft").button().click(function(){
+			showO365Window("http://www.microsoft.com", "Microsoft");
+			
+			return false;
+		});
+
+	function showO365Window(url, windowName) {
+		window.open(url, windowName, "width=800, height=600, left=0, top=0, resizable=yes, scrollbars=yes");
+	
+		return false; // so button doesn't post-back
+	}
+</script>
+
+<div id="MainPageLinkButtons">
+	<ul>
+		<li>
+			<button id="Google" class="O365Buttons" aria-label="Google" title="Google">Google</button>
+		</li>
+		<li>
+			<button id="LinkedIn" class="O365Buttons" aria-label="LinkedIn" title="LinkedIn">LinkedIn</button>
+		</li>
+		<li>
+			<button id="FaceBook" class="O365Buttons" aria-label="FaceBook" title="FaceBook">FaceBook</button>
+		</li>
+		<li>
+			<button id="Twitter" class="O365Buttons" aria-label="Twitter" title="Twitter">Twitter</button>
+		</li>
+		<li>
+			<button id="Bing" class="O365Buttons" aria-label="Bing" title="Bing">Bing</button>
+		</li>
+		<li>
+			<button id="Microsoft" class="O365Buttons" aria-label="Microsoft" title="Microsoft">Microsoft</button>
+		</li>
+	</ul>
+</div>

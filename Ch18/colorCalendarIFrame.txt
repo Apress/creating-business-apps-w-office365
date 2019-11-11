@@ -1,0 +1,24 @@
+<style>
+
+#boardParent{
+	overflow: hidden;
+	width: 1600px;
+	height: 800px;
+	position: relative;
+}
+	
+#boardFrame {
+	top: -230px;
+	left: -200px;
+	width: 1600px;
+	height: 1000px;
+	position: absolute;
+	overflow: hidden;
+}
+
+</style>
+
+<div id="boardParent">
+	<iframe id="boardFrame" src="https://plattecanyon.sharepoint.com/samples/Lists/EventsCalendar/ColorCalendar.aspx" scrolling="no"></iframe>
+</div>
+

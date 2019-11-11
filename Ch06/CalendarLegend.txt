@@ -1,0 +1,94 @@
+	<style>
+		#CalendarLegend ul {
+			list-style: none;
+		}
+
+			#CalendarLegend ul li {
+				display: inline-block;
+				padding: 3px;
+			}
+
+		#CalendarLegend span {
+			width: 250px;
+			color: white;
+			display: block;
+			text-align:center;
+			font-size: 125%;
+			font-weight: bold;
+		}
+
+		#AcademicBuilding1{
+			background-color:#cd0000;
+		}
+
+		#AcademicBuilding2{
+			background-color:#eb8f0b;
+			color: black !important;
+		}
+
+		#AthleticFields{
+			background-color:#ffff00;
+			color: black !important;
+		}
+
+		#ConferenceRoom1{
+			background-color:#0a4723;
+		}
+
+		#ConferenceRoom2{
+			background-color:#3d1c45;
+		}
+
+		#FootballStadium{
+			background-color:#45aff2;
+			color: black !important;
+		}
+
+		#Gym{
+			background-color:#4169e1;
+		}
+
+		#Headquarters{
+			background-color:#790bf3;
+		}
+
+		#Library{
+			background-color:#000000;
+		}
+
+		#NotApplicable{
+			background-color:#f0cb20;
+			color: black !important;
+		}
+
+		#OffBase{
+			background-color:#838785;
+		}
+
+		#Other{
+			background-color:#4802fb;
+		}
+
+		#Theater{
+			background-color:#731717;
+		}
+
+	</style>
+
+	<div id="CalendarLegend">
+        <ul>
+            <li><span id="AcademicBuilding1"> Academic Building 1</span></li>
+            <li> <span id="AcademicBuilding2"> Academic Building 2</span </li>
+            <li><span id="AthleticFields"> Athletic Fields</span></li>
+            <li> <span id="ConferenceRoom1"> Conference Room 1</span> </li>
+            <li> <span id="ConferenceRoom2"> Conference Room 2</span> </li>
+            <li> <span id="FootballStadium"> Football Stadium</span> </li>
+            <li> <span id="Gym"> Gym</span> </li>
+            <li> <span id="Headquarters"> Headquarters</span> </li>
+            <li> <span id="Library"> Library</span> </li>
+            <li> <span id="NotApplicable"> Not Applicable</span> </li>
+            <li> <span id="OffBase"> Off Base</span> </li>
+            <li> <span id="Theater"> Theater</span> </li>
+            <li> <span id="Other"> Other</span> </li>
+        </ul>
+    </div>

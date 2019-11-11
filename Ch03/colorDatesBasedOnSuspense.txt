@@ -1,0 +1,77 @@
+<style>
+	.alert {
+		color: #b79a16;
+		font-weight: bold;
+	}
+
+	.overdue {
+		color: #d72a18;
+		font-weight: bold;
+	}
+
+	.ms-error {
+		color: #d72a18 !important;
+		font-weight: bold !important;
+	}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+	var today = new Date();
+	var numDaysToShowAlert = 7;
+	var existingProcessImn = ProcessImn;
+
+	// need to operate on both date due to director and overall suspense
+	$(function () {
+		FindTableElements();
+	});
+
+	ProcessImn = function () {
+		var results = existingProcessImn.apply(this, arguments);
+
+		FindTableElements();
+		return results;
+	}
+
+	function FindTableElements() {
+		$("table tr td:nth-child(8)").each(function () {
+			var cellId = $(this);
+
+			UpdateDateDisplay(cellId);
+		});
+
+		$("table tr td:nth-child(9)").each(function () {
+			var cellId = $(this);
+
+			UpdateDateDisplay(cellId);
+		});
+	}
+
+	function UpdateDateDisplay(cellId) {
+		var dateText = cellId.text();
+
+		if (dateText != "") {
+			var dateVal = new Date(dateText);
+			var numDays = DateDiff(dateVal, today);
+
+			if (numDays < -1) { // use -1 since date starts at midnight and items due that day show overdue if use 0
+				cellId.addClass("overdue");
+			}
+			else {
+				if (numDays <= numDaysToShowAlert) {
+					cellId.addClass("alert");
+				}
+			}
+		}
+	}
+
+	function DateDiff(date1, date2) {
+		var datediff = date1.getTime() - date2.getTime();
+		//store the getTime diff - or +
+		return (datediff / (24 * 60 * 60 * 1000));
+		//Convert values to -/+ days and return value
+	}
+
+</script>

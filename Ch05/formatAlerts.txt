@@ -1,0 +1,76 @@
+<style>
+	.AlertOutage {
+		font-weight:bold;
+		font-size: 130%;
+		color:red;
+		padding-left: 5px;
+	}
+
+	.AlertHAZCON {
+		font-weight:bold;
+		font-size: 120%;
+		color:#e5c636;
+		padding-left: 5px;
+	}
+
+	.AlertInformational {
+		font-size: 100%;
+		color:blue;
+		font-weight:bold;
+		padding-left: 5px;
+	}
+
+	.USAFAOperational {
+	color: #69aa39;
+	font-size: 110%;
+	font-weight:bold;
+	}
+
+	.ms-viewheadertr { 
+		display: none !important; /* prevents display of row with alert and body headings */
+	}
+
+	.TopPadding {
+		padding-top: 20px;
+	}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+$(function () {
+	var statusArray = ["1. Outage", "2. HAZCON", "3. Informational"];
+	var statusLength = statusArray.length;
+	var num;
+	var status;
+	var fullStatus;
+	var className;
+
+	// look for all td elements containing |||1. Outage|||, etc.
+	$("td.ms-cellstyle.ms-vb2").each(function() {
+		var currentText = $(this).text();
+
+		for (num = 0; num < statusLength; num++){
+			status = statusArray[num];
+			fullStatus = "|||" + status + "|||";
+			className = "Alert" + status.substring(3);
+
+			if (currentText.indexOf(fullStatus) > -1){
+				var newText = currentText.replace(fullStatus, '');
+				$(this).html(newText);
+				$(this).addClass(className);
+			}
+		}
+	});
+	$("tr.ms-alternating.ms-itmHoverEnabled > td").addClass("TopPadding");
+	// account for no items
+	$("tr[id*='empty-WPQ'] > td").each(function() {
+		$(this).html("There are currently no alerts on this network.");
+		$(this).addClass("USAFAOperational");
+	});
+	
+});
+
+</script>
